@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Vidly.Models;
 
 namespace Vidly.Controllers
 {
@@ -11,7 +12,13 @@ namespace Vidly.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            return View();
+            var customers = new List<Customer>
+            {
+                new Customer() { Id = 1, Name = "John Smith"},
+                new Customer() { Id = 2, Name = "Sue Hall"}
+            };
+
+            return View(customers);
         }
     }
 }
