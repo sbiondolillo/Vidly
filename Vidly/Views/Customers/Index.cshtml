@@ -1,19 +1,17 @@
-﻿@model List<Vidly.Models.Customer>
+﻿@model IEnumerable<Vidly.Models.Customer>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Customers</h2>
-@if (Model.Count < 1)
-{
-    <text>There aren't any customers yet</text>
-}
-else
+@if (Model.Any())
 {
     <table class="table table-bordered table-hover">
         <thead>
-            <tr><td>Customer</td></tr>
+            <tr>
+                <th>Customer</th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var customer in Model)
@@ -24,5 +22,9 @@ else
             }
         </tbody>
     </table>
+}
+else
+{
+    <text>There aren't any customers yet</text>
 }
 
