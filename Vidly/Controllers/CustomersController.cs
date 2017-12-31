@@ -20,5 +20,24 @@ namespace Vidly.Controllers
 
             return View(customers);
         }
+
+        // GET: Customers/Details/Id
+        public ActionResult Details(int id)
+        {
+            var customers = new List<Customer>
+            {
+                new Customer() { Id = 1, Name = "John Smith"},
+                new Customer() { Id = 2, Name = "Sue Hall"}
+            };
+
+            var customer = customers.Where(c => c.Id == id).FirstOrDefault();
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(customer);
+        }
     }
 }
