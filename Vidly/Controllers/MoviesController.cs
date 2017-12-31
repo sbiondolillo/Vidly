@@ -11,6 +11,12 @@ namespace Vidly.Controllers
     public class MoviesController : Controller
     {
         // GET: Movies
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: Movies/Random
         public ActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek!" };
