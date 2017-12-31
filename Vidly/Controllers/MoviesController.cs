@@ -13,7 +13,14 @@ namespace Vidly.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            return View();
+            //List<Movie> movies = new List<Movie>();
+            var movies = new List<Movie>
+            {
+                new Movie() {Name = "Shrek"},
+                new Movie() {Name = "Wall-E"}
+            };
+
+            return View(movies);
         }
 
         // GET: Movies/Random
