@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>Customer</th>
+                <th>Discount Rate</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
             {
                 <tr>
                     <td><a href="/Customers/Details/@customer.Id">@customer.Name</a></td>
+                    <td>@customer.MembershipType.DiscountRate%</td>
                 </tr>
             }
         </tbody>
