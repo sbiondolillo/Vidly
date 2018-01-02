@@ -24,6 +24,7 @@ namespace Vidly.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -50,6 +51,14 @@ namespace Vidly.Models
                 .Property(g => g.Name)
                 .IsRequired()
                 .HasMaxLength(255);
+
+            modelBuilder.Entity<Movie>()
+                .Property(m => m.ReleaseDate)
+                .IsRequired();
+
+            modelBuilder.Entity<Movie>()
+                .Property(m => m.NumberInStock)
+                .IsRequired();
 
             base.OnModelCreating(modelBuilder);
         }

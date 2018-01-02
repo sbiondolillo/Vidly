@@ -5,6 +5,9 @@
 }
 
 <h2>Movies</h2>
+<p>
+    <a href="Movies/New" class="btn btn-primary">New Movie</a>
+</p>
 @if (Model.Any())
 {
     <table class="table table-bordered table-hover">
@@ -18,7 +21,7 @@
             @foreach (var movie in Model)
             {
                 <tr>
-                    <td><a href="Movies/Details/@movie.Id">@movie.Name</a></td>
+                    <td><a href="Movies/Edit/@movie.Id">@movie.Name</a></td>
                     <td>@movie.Genre.Name</td>
                 </tr>
             }
