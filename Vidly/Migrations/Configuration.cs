@@ -28,6 +28,7 @@ namespace Vidly.Migrations
             //
 
             context.Movies.AddOrUpdate(
+                m => m.Name,
                 new Models.Movie
                 {
                     Name = "Die Hard",
