@@ -16,6 +16,11 @@ namespace Vidly.Controllers.Api
         {
             _context = new ApplicationDbContext();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         public IEnumerable<Customer> GetCustomers()
         {
             return _context.Customers.ToList();
