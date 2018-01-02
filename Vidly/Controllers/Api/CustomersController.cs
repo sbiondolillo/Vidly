@@ -21,6 +21,7 @@ namespace Vidly.Controllers.Api
         {
             _context.Dispose();
         }
+
         public IEnumerable<Customer> GetCustomers()
         {
             return _context.Customers.ToList();
