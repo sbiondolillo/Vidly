@@ -25,9 +25,12 @@ namespace Vidly.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            var movies = _context.Movies.Include(m => m.Genre);
-
-            return View(movies);
+            if (User.IsInRole(RoleName.CanManageMovies))
+            {
+                return View("List");
+            }
+            return View("ReadOnlyList");
+            
         }
 
         // GET: Movies/Details/{id}
@@ -43,6 +46,7 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         // GET: Movies/New
         public ActionResult New()
         {
