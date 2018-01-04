@@ -10,6 +10,7 @@ namespace Vidly.ViewModels
     {
         [Required]
         [Display(Name = "Phone Number")]
+        [StringLength(50)]
         public string PhoneNumber { get; set; }
 
         [Required]
