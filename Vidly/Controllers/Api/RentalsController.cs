@@ -27,9 +27,11 @@ namespace Vidly.Controllers.Api
                 .Include(r => r.Customer)
                 .Include(r => r.Movie)
                 .Select(r => new RentalListViewModel{
+                    Id = r.Id,
                     CustomerName = r.Customer.Name,
                     MovieName = r.Movie.Name,
-                    DateRented = r.DateRented
+                    DateRented = r.DateRented,
+                    DateReturned = r.DateReturned
                 })
                 .ToList();
 
