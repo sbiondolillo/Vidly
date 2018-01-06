@@ -22,6 +22,17 @@ namespace Vidly.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateRental(RentalDTO rentalDTO)
         {
+            var customer = _context.Customers.Single(c => c.Id == rentalDTO.CustomerId);
+
+            foreach (var movieId in rentalDTO.MovieIds)
+            {
+                var movieInDb = _context.Movies.Single(m => m.Id == movieId);
+                var newRental = new Rental() { Customer = customer, Movie = movieInDb, DateRented = DateTime.Now };
+                _context.Rentals.Add(newRental);
+            }
+
+            _context.SaveChanges();
+
             return Ok();
         }
 
