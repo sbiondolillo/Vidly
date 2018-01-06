@@ -35,7 +35,8 @@ namespace Vidly.Migrations
                     GenreId = 1,
                     ReleaseDate = new DateTime(1988, 7, 15),
                     DateAdded = DateTime.Now,
-                    NumberInStock = 3
+                    NumberInStock = 3,
+                    NumberAvailable = 3
                 },
                 new Models.Movie
                 {
@@ -43,7 +44,8 @@ namespace Vidly.Migrations
                     GenreId = 3,
                     ReleaseDate = new DateTime(1972, 3, 24),
                     DateAdded = DateTime.Now,
-                    NumberInStock = 5
+                    NumberInStock = 5,
+                    NumberAvailable = 5
                 },
                 new Models.Movie
                 {
@@ -51,7 +53,8 @@ namespace Vidly.Migrations
                     GenreId = 5,
                     ReleaseDate = new DateTime(1992, 11, 25),
                     DateAdded = DateTime.Now,
-                    NumberInStock = 1
+                    NumberInStock = 1,
+                    NumberAvailable = 1
                 },
                 new Models.Movie
                 {
@@ -59,7 +62,8 @@ namespace Vidly.Migrations
                     GenreId = 2,
                     ReleaseDate = new DateTime(1987, 9, 25),
                     DateAdded = DateTime.Now,
-                    NumberInStock = 4
+                    NumberInStock = 4,
+                    NumberAvailable = 4
                 });
         }
     }
