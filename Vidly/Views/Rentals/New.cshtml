@@ -6,18 +6,18 @@
 <h2>New Rental Form</h2>
 
 
-<form>
+<form id="newRental">
     <div class="form-group">
-        <label>Customer</label>
+        <label for="customer">Customer</label>
         <div class="tt-container">
-            <input type="text" id="customer" value="" class="form-control" />
+            <input type="text" name="customer" data-rule-validCustomer="true" id="customer" value="" required class="form-control" />
         </div>
     </div>      
 
     <div class="form-group">
-        <label>Movie</label>
+        <label for="movie">Movie</label>
         <div class="tt-container">
-            <input type="text" id="movie" value="" class="form-control" />
+            <input type="text" name="movie" data-rule-moviesNotEmpty="true" id="movie" value="" class="form-control" />
         </div>
     </div> 
 
@@ -33,6 +33,7 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
 
@@ -53,11 +54,11 @@
                 minLength: 3,
                 highlight: true
             }, {
-                name: 'customers',
-                display: 'name',
-                source: customers
+                    name: 'customers',
+                    display: 'name',
+                    source: customers
                 }).on("typeahead:select", function (e, customer) {
-                    vm.customerId = customer.customerId;
+                    vm.customerId = customer.id;
                 });
 
             var movies = new Bloodhound({
@@ -73,9 +74,9 @@
                 minLength: 3,
                 highlight: true
             }, {
-                name: 'movies',
-                display: 'name',
-                source: movies
+                    name: 'movies',
+                    display: 'name',
+                    source: movies
                 }).on("typeahead:select", function (e, movie) {
                     $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
 
@@ -83,7 +84,40 @@
 
                     vm.movieIds.push(movie.id);
                 });
-        })   
+
+            $.validator.addMethod("validCustomer", function () {
+                return vm.customerId && vm.customerId != 0;
+            }, "Please select a valid customer");
+
+            $.validator.addMethod("moviesNotEmpty", function () {
+                return vm.movieIds.length > 0;
+            }, "Please add at least one movie");
+
+            var validator = $("#newRental").validate({
+                submitHandler: function () {
+                    $.ajax({
+                        url: "/api/rentals",
+                        method: "post",
+                        data: vm
+                    })
+                    .done(function () {
+                        toastr.success("Rentals successfully recorded");
+                        $("#customer").typeahead("val", "");
+                        $("#movie").typeahead("val", "");
+                        $("#movies").empty();
+
+                        vm = { movieIds: [] };
+
+                        validator.resetForm();
+                    })
+                    .fail(function () {
+                        toastr.error("Something unexpected happened");
+                        });
+
+                    return false;
+                }
+            }) ;
+        });
 
     </script>
     }
