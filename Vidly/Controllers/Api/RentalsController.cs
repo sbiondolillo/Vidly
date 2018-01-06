@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Vidly.DTOs;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers.Api
 {
@@ -18,12 +20,28 @@ namespace Vidly.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
+        // GET: /api/rentals
+        public IHttpActionResult GetRentals()
+        {
+            var viewModels = _context.Rentals
+                .Include(r => r.Customer)
+                .Include(r => r.Movie)
+                .Select(r => new RentalListViewModel{
+                    CustomerName = r.Customer.Name,
+                    MovieName = r.Movie.Name,
+                    DateRented = r.DateRented
+                })
+                .ToList();
+
+            return Ok(viewModels);
+        }
+
         // POST: /api/rentals
         [HttpPost]
         public IHttpActionResult CreateRental(RentalDTO rentalDTO)
         {
             var customer = _context.Customers.Single(c => c.Id == rentalDTO.CustomerId);
-            
+
             var movies = _context.Movies.Where(m => rentalDTO.MovieIds.Contains(m.Id)).ToList();
             
             foreach (var movie in movies)
@@ -46,4 +64,5 @@ namespace Vidly.Controllers.Api
 
         
     }
+
 }
