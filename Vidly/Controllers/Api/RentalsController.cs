@@ -78,6 +78,9 @@ namespace Vidly.Controllers.Api
 
             Mapper.Map(rentalDTO, rentalInDb);
 
+            rentalInDb.DateReturned = DateTime.Now;
+            rentalInDb.Movie.NumberAvailable++;
+
             try
             {
                 _context.SaveChanges();
