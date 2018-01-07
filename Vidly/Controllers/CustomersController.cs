@@ -9,6 +9,7 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
+    [RoutePrefix("Customers")]
     public class CustomersController : Controller
     {
         private ApplicationDbContext _context;
@@ -22,13 +23,16 @@ namespace Vidly.Controllers
         {
             _context.Dispose();
         }
+
         // GET: Customers
+        [Route]
         public ActionResult Index()
         {
-            return View();
+            return View("List");
         }
 
         // GET: Customers/Details/Id
+        [Route("Details/{id}")]
         public ActionResult Details(int id)
         {
             var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
@@ -41,6 +45,8 @@ namespace Vidly.Controllers
             return View(customer);
         }
 
+        // GET: Customers/New
+        [Route("New")]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -52,6 +58,8 @@ namespace Vidly.Controllers
             return View("CustomerForm", viewModel);
         }
 
+        // POST: Customers
+        [Route]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
@@ -85,6 +93,9 @@ namespace Vidly.Controllers
             return RedirectToAction("Index", "Customers");
         }
 
+        // PUT: Customers/{id}
+        [Route("{id}")]
+        [HttpPost]
         public ActionResult Edit(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
