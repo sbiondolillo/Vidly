@@ -6,14 +6,18 @@ using System.Web.Mvc;
 
 namespace Vidly.Controllers
 {
+    [RoutePrefix("Rentals")]
     public class RentalsController : Controller
     {
         // GET: Rentals
+        [Route]
         public ActionResult Index()
         {
-            return View();
+            return View("ActiveList");
         }
+
         // GET: Rentals/New
+        [Route("new")]
         public ActionResult New()
         {
             return View();
