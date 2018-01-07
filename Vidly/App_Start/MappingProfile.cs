@@ -24,6 +24,8 @@ namespace Vidly.App_Start
                 .ForMember(c => c.Id, opt => opt.Ignore());
             Mapper.CreateMap<MovieDTO, Movie>()
                 .ForMember(m => m.Id, opt => opt.Ignore());
+            Mapper.CreateMap<RentalDTO, Rental>()
+                .ForMember(m => m.Id, opt => opt.Ignore());
         }
         
     }

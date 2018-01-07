@@ -14,6 +14,7 @@
             <th>Movie</th>
             <th>Date Rented</th>
             <th>Date Returned</th>
+            <th>Return</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -40,9 +41,35 @@
                     },
                     {
                         data: "dateReturned"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-return' data-rental-id='" + data + "'>Return</button>"
+                        }
                     }
                 ]
             });
+
+            $("#rentals").on("click", ".js-return", function () {
+                var button = $(this);
+                var rental = table.row(this.parentElement).data();
+                console.log(rental)
+
+                bootbox.confirm("Are you sure you want to return this movie?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/rentals/" + button.attr("data-rental-id"),
+                            method: "PUT",
+                            data: JSON.stringify(rental),
+                            contentType: 'application/json',
+                            success: function () {
+                                table.ajax.reload().draw();
+                            }
+                        });
+                    }
+                });
+            })
         });
     </script>
 }

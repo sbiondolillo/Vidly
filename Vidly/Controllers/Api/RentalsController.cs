@@ -9,6 +9,7 @@ using Vidly.DTOs;
 using Vidly.Models;
 using Vidly.ViewModels;
 using AutoMapper;
+using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers.Api
 {
@@ -57,6 +58,38 @@ namespace Vidly.Controllers.Api
             _context.SaveChanges();
 
             return Ok();
+        }
+
+        // PUT: api/rentals/{id}
+        [HttpPut]
+        public IHttpActionResult EditRental(int id, RentalDTO rentalDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var rentalInDb = _context.Rentals.SingleOrDefault(c => c.Id == id);
+
+            if (rentalInDb == null)
+            {
+                return NotFound();
+            }
+
+            Mapper.Map(rentalDTO, rentalInDb);
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+
+                Console.WriteLine(e);
+            }
+
+
+            return Ok(Mapper.Map(rentalInDb, rentalDTO));
         }
 
         
