@@ -582,7 +582,7 @@
     <Content Include="Views\Movies\MovieForm.cshtml" />
     <Content Include="Views\Movies\ReadOnlyList.cshtml" />
     <Content Include="Views\Rentals\New.cshtml" />
-    <Content Include="Views\Rentals\Index.cshtml" />
+    <Content Include="Views\Rentals\FullList.cshtml" />
     <Content Include="Views\Rentals\ActiveList.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,13 @@ namespace Vidly.Controllers
             return View("ActiveList");
         }
 
+        // GET: Rentals/All
+        [Route("All")]
+        public ActionResult All()
+        {
+            return View("FullList");
+        }
+
         // GET: Rentals/New
         [Route("new")]
         public ActionResult New()
