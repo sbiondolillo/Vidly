@@ -58,6 +58,25 @@ namespace Vidly.Controllers
             return View("CustomerForm", viewModel);
         }
 
+        // PUT: Customers/{id}
+        [Route("{id}")]
+        [HttpPost]
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+            return View("CustomerForm", viewModel);
+        }
+
         // POST: Customers
         [Route]
         [HttpPost]
@@ -93,23 +112,6 @@ namespace Vidly.Controllers
             return RedirectToAction("Index", "Customers");
         }
 
-        // PUT: Customers/{id}
-        [Route("{id}")]
-        [HttpPost]
-        public ActionResult Edit(int id)
-        {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
-
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            var viewModel = new CustomerFormViewModel
-            {
-                Customer = customer,
-                MembershipTypes = _context.MembershipTypes.ToList()
-            };
-            return View("CustomerForm", viewModel);
-        }
+        
     }
 }

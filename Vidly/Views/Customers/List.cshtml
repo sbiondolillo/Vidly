@@ -1,11 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customers";
 }
 
 <h2>Customers</h2>
 <p>
-    <a href="Customers/New" class="btn btn-primary">New Customer</a>
+    <a href="Customers/New" class="btn btn-success">New Customer</a>
 </p>
 <table id="customers" class="table table-bordered table-hover">
     <thead>
@@ -25,14 +24,14 @@
         $(document).ready(function () {
             var table = $("#customers").DataTable({
                 ajax: {
-                    url: "/api/customers",
+                    url: "api/customers",
                     dataSrc: ""
                 },
                 columns: [
                     {
                         data: "name",
                         render: function (data, type, customer) {
-                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>"
+                            return "<a href='/Customers/Edit/" + customer.id + "'>" + customer.name + "</a>"
                         }
                     },
                     {
