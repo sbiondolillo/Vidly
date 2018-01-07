@@ -50,6 +50,8 @@
                 ]
             });
 
+            table.order([2, "asc"]).draw();
+
             $("#rentals").on("click", ".js-return", function () {
                 var button = $(this);
                 var rental = table.row(this.parentElement).data();
