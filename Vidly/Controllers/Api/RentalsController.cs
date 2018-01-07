@@ -13,6 +13,7 @@ using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers.Api
 {
+    [RoutePrefix("api/rentals")]
     public class RentalsController : ApiController
     {
         private ApplicationDbContext _context;
@@ -21,8 +22,9 @@ namespace Vidly.Controllers.Api
         {
             _context = new ApplicationDbContext();
         }
-
+        
         // GET: /api/rentals
+        [Route]
         public IHttpActionResult GetRentals()
         {
             var rentalDTOs = _context.Rentals
@@ -35,6 +37,7 @@ namespace Vidly.Controllers.Api
         }
 
         // POST: /api/rentals
+        [Route]
         [HttpPost]
         public IHttpActionResult CreateRental(NewRentalDTO newRentalDTO)
         {
@@ -61,6 +64,7 @@ namespace Vidly.Controllers.Api
         }
 
         // PUT: api/rentals/{id}
+        [Route("{id}")]
         [HttpPut]
         public IHttpActionResult EditRental(int id, RentalDTO rentalDTO)
         {
