@@ -31,10 +31,10 @@
                 },
                 columns: [
                     {
-                        data: "customer.name"
+                        data: "customerName"
                     },
                     {
-                        data: "movie.name"
+                        data: "movieName"
                     },
                     {
                         data: "dateRented"
@@ -64,6 +64,7 @@
                             data: JSON.stringify(rental),
                             contentType: 'application/json',
                             success: function () {
+                                toastr.success("Rental successfully returned");
                                 table.ajax.reload().draw();
                             }
                         });

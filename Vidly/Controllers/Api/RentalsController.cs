@@ -69,14 +69,15 @@ namespace Vidly.Controllers.Api
                 return BadRequest();
             }
 
-            var rentalInDb = _context.Rentals.SingleOrDefault(c => c.Id == id);
+            var rentalInDb = _context.Rentals
+                .Include(r => r.Movie)
+                .Include(r => r.Customer)
+                .SingleOrDefault(c => c.Id == id);
 
             if (rentalInDb == null)
             {
                 return NotFound();
             }
-
-            Mapper.Map(rentalDTO, rentalInDb);
 
             rentalInDb.DateReturned = DateTime.Now;
             rentalInDb.Movie.NumberAvailable++;

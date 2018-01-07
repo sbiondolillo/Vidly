@@ -11,10 +11,12 @@ namespace Vidly.DTOs
         public int Id { get; set; }
 
         [Required]
-        public CustomerDTO Customer { get; set; }
+        public string CustomerName { get; set; }
 
         [Required]
-        public MovieDTO Movie { get; set; }
+        public string MovieName { get; set; }
+
+        [Required]
         public DateTime DateRented { get; set; }
         public DateTime? DateReturned { get; set; }
     }
