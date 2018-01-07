@@ -45,8 +45,13 @@
                     },
                     {
                         data: "id",
-                        render: function (data) {
-                            return "<button class='btn-link js-return' data-rental-id='" + data + "'>Return</button>"
+                        render: function (data, type, rental) {
+                            var response = "";
+                            if (rental["dateReturned"] == null) {
+                                response += "<button class='btn-link js-return' data-rental-id='" + data + "'>Return</button>";
+                            }
+                            return response;
+                            
                         }
                     }
                 ]
