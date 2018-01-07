@@ -2,7 +2,7 @@
 
 namespace Vidly.DTOs
 {
-    public class RentalDTO
+    public class NewRentalDTO
     {
         public int CustomerId { get; set; }
         

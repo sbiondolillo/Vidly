@@ -40,11 +40,11 @@ namespace Vidly.Controllers.Api
 
         // POST: /api/rentals
         [HttpPost]
-        public IHttpActionResult CreateRental(RentalDTO rentalDTO)
+        public IHttpActionResult CreateRental(NewRentalDTO newRentalDTO)
         {
-            var customer = _context.Customers.Single(c => c.Id == rentalDTO.CustomerId);
+            var customer = _context.Customers.Single(c => c.Id == newRentalDTO.CustomerId);
 
-            var movies = _context.Movies.Where(m => rentalDTO.MovieIds.Contains(m.Id)).ToList();
+            var movies = _context.Movies.Where(m => newRentalDTO.MovieIds.Contains(m.Id)).ToList();
             
             foreach (var movie in movies)
             {
