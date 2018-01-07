@@ -8,6 +8,7 @@ using System.Web.Http;
 using Vidly.DTOs;
 using Vidly.Models;
 using Vidly.ViewModels;
+using AutoMapper;
 
 namespace Vidly.Controllers.Api
 {
@@ -23,19 +24,13 @@ namespace Vidly.Controllers.Api
         // GET: /api/rentals
         public IHttpActionResult GetRentals()
         {
-            var viewModels = _context.Rentals
+            var rentalDTOs = _context.Rentals
                 .Include(r => r.Customer)
                 .Include(r => r.Movie)
-                .Select(r => new RentalListViewModel{
-                    Id = r.Id,
-                    CustomerName = r.Customer.Name,
-                    MovieName = r.Movie.Name,
-                    DateRented = r.DateRented,
-                    DateReturned = r.DateReturned
-                })
+                .Select(Mapper.Map<Rental, RentalDTO>)
                 .ToList();
 
-            return Ok(viewModels);
+            return Ok(rentalDTOs);
         }
 
         // POST: /api/rentals
