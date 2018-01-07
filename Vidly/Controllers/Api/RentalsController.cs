@@ -36,6 +36,36 @@ namespace Vidly.Controllers.Api
             return Ok(rentalDTOs);
         }
 
+        // GET: /api/rentals/active
+        [Route("active")]
+        public IHttpActionResult GetActiveRentals()
+        {
+            var rentalQuery = _context.Rentals
+                .Include(r => r.Customer)
+                .Include(r => r.Movie)
+                .Select(Mapper.Map<Rental, RentalDTO>)
+                .ToList();
+
+            var rentalDTOs = rentalQuery.Where(r => r.DateReturned == null).ToList();
+
+            return Ok(rentalDTOs);
+        }
+
+        // GET: /api/rentals/complete
+        [Route("completed")]
+        public IHttpActionResult GetCompletedRentals()
+        {
+            var rentalQuery = _context.Rentals
+                .Include(r => r.Customer)
+                .Include(r => r.Movie)
+                .Select(Mapper.Map<Rental, RentalDTO>)
+                .ToList();
+
+            var rentalDTOs = rentalQuery.Where(r => r.DateReturned != null).ToList();
+
+            return Ok(rentalDTOs);
+        }
+
         // POST: /api/rentals
         [Route]
         [HttpPost]
