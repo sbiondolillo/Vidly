@@ -305,6 +305,10 @@
     <Compile Include="Migrations\201801061544367_AddNumberAvailableToMovies.Designer.cs">
       <DependentUpon>201801061544367_AddNumberAvailableToMovies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801080208202_AddCanManageCustomersRole.cs" />
+    <Compile Include="Migrations\201801080208202_AddCanManageCustomersRole.Designer.cs">
+      <DependentUpon>201801080208202_AddCanManageCustomersRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -575,7 +579,7 @@
     <Content Include="Views\Movies\Random.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Movies\List.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\List.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
@@ -584,6 +588,7 @@
     <Content Include="Views\Rentals\New.cshtml" />
     <Content Include="Views\Rentals\FullList.cshtml" />
     <Content Include="Views\Rentals\ActiveList.cshtml" />
+    <Content Include="Views\Customers\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -652,6 +657,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801061544367_AddNumberAvailableToMovies.resx">
       <DependentUpon>201801061544367_AddNumberAvailableToMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801080208202_AddCanManageCustomersRole.resx">
+      <DependentUpon>201801080208202_AddCanManageCustomersRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
