@@ -28,7 +28,11 @@ namespace Vidly.Controllers
         [Route]
         public ActionResult Index()
         {
-            return View("List");
+            if (User.IsInRole(RoleName.CanManageCustomers))
+            {
+                return View("List");
+            }
+            return View("ReadOnlyList");
         }
 
         // GET: Customers/Details/Id
@@ -46,6 +50,7 @@ namespace Vidly.Controllers
         }
 
         // GET: Customers/New
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         [Route("New")]
         public ActionResult New()
         {
@@ -59,6 +64,7 @@ namespace Vidly.Controllers
         }
 
         // PUT: Customers/{id}
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         [Route("{id}")]
         [HttpPost]
         public ActionResult Edit(int id)
@@ -78,6 +84,7 @@ namespace Vidly.Controllers
         }
 
         // POST: Customers
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         [Route]
         [HttpPost]
         [ValidateAntiForgeryToken]
