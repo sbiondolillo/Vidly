@@ -11,6 +11,7 @@ using Vidly.Models;
 
 namespace Vidly.Controllers.Api
 {
+    [RoutePrefix("api/customers")]
     public class CustomersController : ApiController
     {
         private ApplicationDbContext _context;
@@ -25,6 +26,8 @@ namespace Vidly.Controllers.Api
             _context.Dispose();
         }
 
+        // GET: /api/customers
+        [Route]
         public IHttpActionResult GetCustomers(string query = null)
         {
             var customersQuery = _context.Customers
@@ -42,6 +45,8 @@ namespace Vidly.Controllers.Api
             return Ok(customerDTOs);
         }
 
+        // GET: /api/customers/{id}
+        [Route("{id}")]
         public IHttpActionResult GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -54,6 +59,9 @@ namespace Vidly.Controllers.Api
             return Ok(Mapper.Map<Customer,CustomerDTO>(customer));
         }
 
+        // POST: /api/customers
+        [Authorize(Roles = RoleName.CanManageCustomers)]
+        [Route]
         [HttpPost]
         public IHttpActionResult CreateCustomer(CustomerDTO customerDTO)
         {
@@ -72,6 +80,9 @@ namespace Vidly.Controllers.Api
             return Created(new Uri(Request.RequestUri + "/" + customer.Id),customerDTO);
         }
 
+        // PUT: /api/customers/{id}
+        [Authorize(Roles = RoleName.CanManageCustomers)]
+        [Route("{id}")]
         [HttpPut]
         public void EditCustomer(int id, CustomerDTO customerDTO)
         {
@@ -92,6 +103,9 @@ namespace Vidly.Controllers.Api
             _context.SaveChanges();
         }
 
+        // DELETE: /api/customers/{id}
+        [Authorize(Roles = RoleName.CanManageCustomers)]
+        [Route("{id}")]
         [HttpDelete]
         public void DeleteCustomer(int id)
         {
